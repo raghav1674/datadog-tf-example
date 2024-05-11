@@ -1,0 +1,260 @@
+{
+    "title": "vm1.example.local-terraform",
+    "description": "Top host-level metrics for vm1.example.local.             Clone this dashboard to add your own metrics.\n\n[Link to infrastructure list](/infrastructure?filter=vm1.example.local&hostname=vm1.example.local)",
+    "widgets": [
+        {
+            "id": 0,
+            "definition": {
+                "title": "CPU usage (%)",
+                "show_legend": true,
+                "legend_layout": "auto",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "system.cpu.idle{host:vm1.example.local}"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "query2",
+                                "query": "system.cpu.system{host:vm1.example.local}"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "query3",
+                                "query": "system.cpu.iowait{host:vm1.example.local}"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "query4",
+                                "query": "system.cpu.user{host:vm1.example.local}"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "query5",
+                                "query": "system.cpu.stolen{host:vm1.example.local}"
+                            }
+                        ],
+                        "display_type": "area"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 1,
+            "definition": {
+                "title": "Processes memory usage",
+                "type": "treemap",
+                "requests": [
+                    {
+                        "q": "processes{host:vm1.example.local}"
+                    }
+                ],
+                "size_by": "pct_mem",
+                "color_by": "user",
+                "group_by": "family"
+            }
+        },
+        {
+            "id": 2,
+            "definition": {
+                "title": "Load Averages 1-5-15",
+                "show_legend": true,
+                "legend_layout": "auto",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "system.load.1{host:vm1.example.local}"
+                            }
+                        ]
+                    },
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "system.load.5{host:vm1.example.local}"
+                            }
+                        ]
+                    },
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "system.load.15{host:vm1.example.local}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 3,
+            "definition": {
+                "title": "Memory breakdown",
+                "show_legend": true,
+                "legend_layout": "auto",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "sum:system.mem.usable{host:vm1.example.local}"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "query2",
+                                "query": "sum:system.mem.total{host:vm1.example.local}"
+                            }
+                        ],
+                        "formulas": [
+                            {
+                                "formula": "query1"
+                            },
+                            {
+                                "formula": "query2 - query1"
+                            }
+                        ],
+                        "display_type": "area"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 4,
+            "definition": {
+                "title": "Available Swap",
+                "show_legend": true,
+                "legend_layout": "auto",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "avg:system.swap.free{host:vm1.example.local}"
+                            },
+                            {
+                                "data_source": "metrics",
+                                "name": "query2",
+                                "query": "avg:system.swap.used{host:vm1.example.local}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 5,
+            "definition": {
+                "title": "Disk usage by device (%)",
+                "show_legend": true,
+                "legend_layout": "auto",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "max:system.disk.in_use{host:vm1.example.local} by {device}"
+                            }
+                        ],
+                        "formulas": [
+                            {
+                                "formula": "query1 * 100"
+                            }
+                        ],
+                        "display_type": "line"
+                    }
+                ],
+                "markers": [
+                    {
+                        "label": "full",
+                        "value": "y = 100",
+                        "display_type": "error dashed"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 6,
+            "definition": {
+                "title": "Disk latency (by device)",
+                "show_legend": true,
+                "legend_layout": "auto",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "max:system.io.await{host:vm1.example.local} by {device}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "id": 7,
+            "definition": {
+                "title": "Network traffic (bytes per sec)",
+                "show_legend": true,
+                "legend_layout": "auto",
+                "type": "timeseries",
+                "requests": [
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "sum:system.net.bytes_rcvd{host:vm1.example.local}"
+                            }
+                        ]
+                    },
+                    {
+                        "response_format": "timeseries",
+                        "queries": [
+                            {
+                                "data_source": "metrics",
+                                "name": "query1",
+                                "query": "sum:system.net.bytes_sent{host:vm1.example.local}"
+                            }
+                        ],
+                        "formulas": [
+                            {
+                                "formula": "0 - query1"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ],
+    "template_variables": [],
+    "layout_type": "ordered",
+    "notify_list": [],
+    "reflow_type": "auto"
+}
