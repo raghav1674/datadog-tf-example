@@ -2,3 +2,5 @@
 *.tfstate.backup
 use.sh
 .terraform/
+.env
+tfplan

@@ -233,21 +233,6 @@
                                 "query": "sum:system.net.bytes_rcvd{host:vm1.example.local}"
                             }
                         ]
-                    },
-                    {
-                        "response_format": "timeseries",
-                        "queries": [
-                            {
-                                "data_source": "metrics",
-                                "name": "query1",
-                                "query": "sum:system.net.bytes_sent{host:vm1.example.local}"
-                            }
-                        ],
-                        "formulas": [
-                            {
-                                "formula": "0 - query1"
-                            }
-                        ]
                     }
                 ]
             }
